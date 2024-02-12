@@ -108,9 +108,5 @@ area 0.0.0.0 range 2001::7:0/126
 interface ens224
 ipv6 ospf6 area 0.0.0.0
 exit
-!
-interface ens256
-ipv6 ospf6 area 0.0.0.0
-exit
 ``` 
 После завершения конфигурации в frr написать ```write```
