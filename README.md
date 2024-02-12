@@ -3,7 +3,6 @@
 ---- имя --- 
 hostnamectl set-hostname Имя устройства 
 Newgrp 
-----IP--- 
 Name
 |Ipv4|mask|Def_get|
 |Ipv4|mask|Def_get|
