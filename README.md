@@ -196,3 +196,8 @@ systemctl start radvd
 systemctl enable radvd  
 ```
 # 4 ALL (local)  
+|User|Password|Name|  
+|---|---|---|  
+|Admin|P@ssw0rd|CLI HQ-SRV HQ-R| 
+|Branch admin|P@ssw0rd|BR-SRV BR-R| 
+|Network admin|P@ssw0rd|HQ-R BR-R BRSRV| 
