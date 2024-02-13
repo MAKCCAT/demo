@@ -110,3 +110,39 @@ ipv6 ospf6 area 0.0.0.0
 exit
 ``` 
 После завершения конфигурации в frr написать ```write```
+L3 Пример: 1 соединения ipv4/mask and ipv6/mask  
+# 3 HQ-R  
+```  
+apt install isc-dhcp-server  
+nano /etc/default/isc-dhcp-server
+```  
+если в сети подразумевается DHCP-relay ,то  
+1 интерфейс в сторону клиента, 2 интерфейс в сторону запроса  
+```
+INTERFACESv4="ens224 ens256"   
+INTERFACESv6="ens224 ens256"
+```  
+---
+### IPv4
+``` nano /etc/dhcp/dhcpd.conf ```  
+Пример DHCP для ipv4 без Relay:  
+```
+default-lease-time 600;  
+max-lease-time 7200;  
+ddns-updates on;  
+ddns-update-style interim;  
+authoritative;
+  
+subnet 192.168. 1.0 netmask 255.255.255. 192 {
+ range 192. 168.1.3 192.168.1.62;
+ option routers 192.168.1.1;
+ option domain-name "hq.work";
+ option domain-name-servers 192.168.1.2;
+}
+```  
+Где:
+```ddns-update-style interim``` — способ автообновления базы dns  
+```authoritative``` — делает сервер доверенным  
+```subnet``` — указание сети  
+```range — пул адресов```  
+```option routers — шлюз по умолчанию```  
