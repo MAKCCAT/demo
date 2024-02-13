@@ -1,4 +1,4 @@
-# 1 ALL
+# 1 ALL (Name/IPv4/IPv6)  
 Если в задании не будут использоваться встроенные репозитории, а будет возможность скачивать все пакеты из интернета, необходимо отключить проверку пакетов через cdrom зайдя по пути Nano /etc/apt/sources.list и Закоментировать находящуюся там строку.  
 ### Name   
 ```
@@ -43,7 +43,7 @@ netmask 126
 gateway 2001::7:2
 ```
 после перезагружаем сеть```systemctl restart networking```
-# 2 BRR HQR ISP
+# 2 BRR HQR ISP (FRR-OSPF/L3)  
 ```
 apt install frr 
 nano /etc/frr/daemons
@@ -111,7 +111,7 @@ exit
 ``` 
 После завершения конфигурации в frr написать ```write```
 L3 Пример: 1 соединения ipv4/mask and ipv6/mask  
-# 3 HQ-R  
+# 3 HQ-R (DHCP)  
 ```  
 apt install isc-dhcp-server  
 nano /etc/default/isc-dhcp-server
@@ -175,3 +175,24 @@ option dhcp6.name-servers 2001::1:2;
 option dhcp6.domain-search "hq.work";
 }  
 ```  
+``` apt install radvd ``` 
+``` nano /etc/radvd.conf ```
+Пример конфигурации Radvd:  
+```
+interface ens224
+{  
+MinRtrAdvInterval 3;  
+MaxRtrAdvInterval 60;  
+AdvSendAdvert on;  
+};  
+```
+Где:  
+interface — это имя интерфейса направленного в локальную сеть  
+Min и MAX интервалы — это интервалы рассылки объявлений  
+AdvSendAdvert — это разрешение на выдачу объявлений от маршрутизатор клиентам  
+```  
+systemctl stop radvd  
+systemctl start radvd  
+systemctl enable radvd  
+```
+# 4 ALL (local)  
