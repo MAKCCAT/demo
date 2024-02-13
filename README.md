@@ -218,6 +218,7 @@ admin  ALL=(ALL: ALL) ALL
 ```iperf3 -c (ip адрес проверяемой машины) -i1 -t20```  
 # 6 HQ-R BR-R (backup)  
 ```mkdir /mnt/backup```  
+### Создаём скрипт на HQR  
 ```touch /etc/backup.sh```  
 Если не зашёл автоматически пишем  
 ```nano /etc/backup.sh```  
@@ -272,3 +273,4 @@ echo — необязательные строки вывода
 ```bash (имя_файла)```  
 В нашем случае имя backup.tgz  
 ```tar -xvpzf /mnt/backup/HQ-R-Thursday.tgz -C / --numeric-owner```  
+### Перекидываем скрипт по ssh на ISP  
