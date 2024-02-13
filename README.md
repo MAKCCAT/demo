@@ -140,9 +140,18 @@ subnet 192.168. 1.0 netmask 255.255.255. 192 {
  option domain-name-servers 192.168.1.2;
 }
 ```  
-Где:
+Где:  
 ```ddns-update-style interim``` — способ автообновления базы dns  
 ```authoritative``` — делает сервер доверенным  
 ```subnet``` — указание сети  
 ```range — пул адресов```  
 ```option routers — шлюз по умолчанию```  
+```diff
+-Примечание: после каждого изменения конфигурации необходимо
+-перезагружать DHCP сервер для применения конфигурации
+```
+С помошью команд:
+```  
+systemctl stop isc-dhcp-server  
+systemctl start isc-dhcp-server  
+```
