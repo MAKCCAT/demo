@@ -274,3 +274,6 @@ echo — необязательные строки вывода
 В нашем случае имя backup.tgz  
 ```tar -xvpzf /mnt/backup/HQ-R-Thursday.tgz -C / --numeric-owner```  
 ### Перекидываем скрипт по ssh на ISP  
+```ssh имя@адрес```  
+Пример:  
+```ssh network_admin@192.168.1.1```  
