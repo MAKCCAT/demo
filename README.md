@@ -72,7 +72,7 @@ ospf router-id 2.2.2.2
 network 10.10.10.4/30 area 0  
 network 192.168.2.0/28 area 2
 ```
-```exit```
+```exit```  
 После завершения конфигурации в frr написать ```write```  
 ```nano /etc/sysctl.conf```  
 переменную ```net.ipv4.ip_forward=1``` и ```net.ipv6.conf.all.forwarding=1``` необходимо раскоментить и сохранинть измнения в файле, и применить изменения командой
