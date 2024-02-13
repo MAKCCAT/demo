@@ -218,7 +218,7 @@ admin  ALL=(ALL: ALL) ALL
 ```iperf3 -c (ip адрес проверяемой машины) -i1 -t20```  
 # 6 HQ-R BR-R (backup)  
 ```mkdir /mnt/backup```  
-```touch /etc/backup.sh```
+```touch /etc/backup.sh```  
 Если не зашёл автоматически пишем  
 ```nano /etc/backup.sh```  
 В файле пишем:  
