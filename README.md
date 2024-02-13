@@ -1,3 +1,4 @@
+# *****************Module_1*****************
 # 1 ALL (Name/IPv4/IPv6)  
 Если в задании не будут использоваться встроенные репозитории, а будет возможность скачивать все пакеты из интернета, необходимо отключить проверку пакетов через cdrom зайдя по пути Nano /etc/apt/sources.list и Закоментировать находящуюся там строку.  
 ### Name   
@@ -43,7 +44,7 @@ netmask 126
 gateway 2001::7:2
 ```
 после перезагружаем сеть```systemctl restart networking```
-# 2 BRR HQR ISP (FRR-OSPF/L3)  
+# 2 BRR HQR ISP Внутренняя динамическая маршрутизация FRR-OSPF/L3)  
 ```
 apt install frr 
 nano /etc/frr/daemons
@@ -111,7 +112,7 @@ exit
 ``` 
 После завершения конфигурации в frr написать ```write```  
 L3 Пример  соединения: ipv4/mask and ipv6/mask  
-# 3 HQ-R (DHCP)  
+# 3 HQ-R (автоматическое распределение IP DHCP)  
 ```  
 apt install isc-dhcp-server  
 nano /etc/default/isc-dhcp-server
@@ -195,9 +196,19 @@ systemctl stop radvd
 systemctl start radvd  
 systemctl enable radvd  
 ```
-# 4 ALL (local)  
+# 4 ALL (local user)  
 |User|Password|Name|  
 |---|---|---|  
 |Admin|P@ssw0rd|CLI HQ-SRV HQ-R| 
 |Branch admin|P@ssw0rd|BR-SRV BR-R| 
 |Network admin|P@ssw0rd|HQ-R BR-R BRSRV| 
+```adduser имя```  
+Вводим пароль  
+Для Root прав команда ```visudo```  
+В окне вписываем:  
+```  
+#User privilege specification  
+root   ALL=(ALL: ALL) ALL  
+admin  ALL=(ALL: ALL) ALL  
+```
+# 5 HQ-R ISP (пропускную способность сети iperf3)  
