@@ -202,6 +202,7 @@ systemctl enable radvd
 |Admin|P@ssw0rd|CLI HQ-SRV HQ-R| 
 |Branch admin|P@ssw0rd|BR-SRV BR-R| 
 |Network admin|P@ssw0rd|HQ-R BR-R BRSRV| 
+---  
 ```adduser имя```  
 Вводим пароль  
 Для Root прав команда ```visudo```  
