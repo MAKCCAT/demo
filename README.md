@@ -157,3 +157,21 @@ systemctl start isc-dhcp-server
 ```  
 ```systemctl enable isc-dhcp-server```  
 ### IPv6
+```nano /etc/dhcp/dhcpd6.conf```
+Пример DHCP для IPv6:  
+```  
+default-lease-time 2592000;  
+preferred-lifetime 604800;  
+option dhcp-renewal-time 3600;  
+option dhcp-rebinding-time 7200;  
+allow leasequery;  
+  
+option dhcp6.info -refresh-time 21600;  
+authoritative;  
+  
+subnet6 2001::1:0/122 {
+range6 2001::1:0 2001::1:3e;  
+option dhcp6.name-servers 2001::1:2;  
+option dhcp6.domain-search "hq.work";
+}  
+```  
