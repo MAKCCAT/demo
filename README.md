@@ -259,4 +259,16 @@ echo "Backup finished"
 date
 
 ls -lh $dest
-```
+```  
+Где:  
+backup_files — копируемые директории  
+dest — место куда копируем директории  
+day — параметр который указывает день бэкапа  
+hostname — имя от кого он выполнился  
+archive_file — конечное имя файла  
+tar czf — в месте указанное в dest помещает файл с именем указанным  
+в archive_file с содержимым указанным в backup_files  
+echo — необязательные строки вывода  
+```bash (имя_файла)```  
+В нашем случае имя backup.tgz  
+```tar -xvpzf /mnt/backup/HQ-R-Thursday.tgz -C / --numeric-owner```  
