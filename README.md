@@ -110,7 +110,7 @@ ipv6 ospf6 area 0.0.0.0
 exit
 ``` 
 После завершения конфигурации в frr написать ```write```  
-L3 Пример: 1 соединения ipv4/mask and ipv6/mask  
+L3 Пример  соединения: ipv4/mask and ipv6/mask  
 # 3 HQ-R (DHCP)  
 ```  
 apt install isc-dhcp-server  
