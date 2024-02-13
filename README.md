@@ -212,4 +212,51 @@ systemctl enable radvd
 root   ALL=(ALL: ALL) ALL  
 admin  ALL=(ALL: ALL) ALL  
 ```
-# 5 HQ-R ISP (пропускную способность сети iperf3)  
+# 5 HQ-R ISP (пропускная способность сети iperf3)  
+```apt install iperf3```  
+Выбрать yes  
+```iperf3 -c (ip адрес проверяемой машины) -i1 -t20```  
+# 6 HQ-R BR-R (backup)  
+```mkdir /mnt/backup```  
+```touch /etc/backup.sh```
+Если не зашёл автоматически пишем  
+```nano /etc/backup.sh```  
+В файле пишем:  
+1) Упрашёный вариант:  
+```
+#!/bin/bash
+backup_files="/home /etc /root /boot /opt"
+
+dest="/mnt/backup"
+
+archive_file="backup.tgz"
+echo "Backing up $backup_files to $dest/$archive_file"
+
+tar czf $dest/sarchive_file $backup_files
+
+echo "Backup finished"
+
+ls -lh $dest
+```  
+2) Расширеный вариант:
+```
+#!/bin/bash
+backup_files="/home /etc /root /boot /opt"
+
+dest="/mnt/backup"
+
+day=$(date +%A)
+hostname=$(hostname -s)
+archive_file="$hostname-$day.tgz"
+echo "Backing up $backup_files to $dest/$archive_file"
+date
+echo
+
+tar czf $dest/sarchive_file $backup_files
+
+echo
+echo "Backup finished"
+date
+
+ls -lh $dest
+```
