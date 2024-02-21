@@ -297,4 +297,6 @@ echo — необязательные строки вывода
 (HQ-SRV)  
 ```nano /etc/ssh/sshd_config```  
 Где необходимо раскоментировать и прописать yes  
-```PermitRootLogin yes```  
+```PermitRootLogin yes``` 
+после перезагружаем службу ssh  
+```systemctl restart ssh```  
