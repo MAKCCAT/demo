@@ -327,3 +327,6 @@ ssh-keygen -c «имя_устройства_с_которого_создан_к�
 |---|---|---|
 |BR-SRV.branch.work|A|IP - адрес|
 ---  
+```apt install bind9 dnsutils```  
+---  
+```nano /etc/bind/named.conf.default-zones```  
