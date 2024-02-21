@@ -318,10 +318,12 @@ ssh-keygen -c «имя_устройства_с_которого_создан_к�
 # *****************Module_2*****************  
 # 1  HQ-SRV (DNS Server)  
 ### Зона hq.work
-|Name|id|area|range/mask|
-|---|---|---|---|
+|HQ-R.hq.work|A,PTR|IP - адрес|
+|---|---|---|
+|HQ-SRV.hq.work|A,PTR|IP - адрес|
 ---  
 ### Зона branch.work
-|Name|id|area|range/mask|
-|---|---|---|---|
+|BR-R.branch.work|A,PTR|IP - адрес|
+|---|---|---|
+|BR-SRV.branch.work|A|IP - адрес|
 ---  
