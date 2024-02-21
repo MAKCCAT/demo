@@ -176,8 +176,8 @@ option dhcp6.name-servers 2001::1:2;
 option dhcp6.domain-search "hq.work";
 }  
 ```  
-``` apt install radvd ``` 
-``` nano /etc/radvd.conf ```
+``` apt install radvd ```  
+``` nano /etc/radvd.conf ```  
 Пример конфигурации Radvd:  
 ```
 interface ens224
@@ -282,5 +282,11 @@ echo — необязательные строки вывода
 ```scp /расположение/имя_файла имя@адрес :/расположение/имя_файла```  
 Пример:  
 ```scp /etc/backup.sh network_admin@192.168.2.1:/home/network_admin```  
-# 7 HQ-SRV (SSH по порту N по средствам контролирования трафика)  
+# 7 HQ-SRV (SSH по порту 2222, средства контролирования трафика)  
 ```nano /etc/ssh/sshd_config```  
+Изменяем порт на 2222  
+```systemctl restart ssh```  
+```apt install iptables-persistent```  
+правило iptables для подмены порта ssh:  
+```iptables -t nat -A PREROUTING -d 192.168.1.2/26 -p tcp -m tcp --dport -destination 192.168.1.2:2222```  
+(это одна команда)  
