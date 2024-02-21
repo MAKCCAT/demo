@@ -290,3 +290,11 @@ echo — необязательные строки вывода
 правило iptables для подмены порта ssh:  
 ```iptables -t nat -A PREROUTING -d 192.168.1.2/26 -p tcp -m tcp --dport -destination 192.168.1.2:2222```  
 (это одна команда)  
+```iptables-save > /etc/iptables/rules.v4 ```  
+# 8 ALL but dont CLI (контроль доступа до HQ-SRV по SSH со всех устройств)  
+если нам необходим доступ только от локальных учётных записей , то шаг 1 необходимо пропустить  
+Шаг 1(для доступа по root):  
+(HQ-SRV)  
+```nano /etc/ssh/sshd_config```  
+Где необходимо раскоментировать и прописать yes  
+```PermitRootLogin yes```  
