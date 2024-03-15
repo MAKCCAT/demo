@@ -391,3 +391,16 @@ zone "0.0.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.2.ip6.arpa" {
 (так как по содержанию они не отличаются)  
 Первым шагом сконфигурируем зону прямого просмотра переходим по пути и конфигурируем файл  
 ```nano /etc/bind/hq```  
+Зона прямого просмотра hq.work:  
+```
+;  
+; BIND data file for local loopback interface  
+;  
+$TTL 604800
+@      IN      SOA      hq. work.      root.hq.work.  (
+                               2              ; Serial
+                          604800              ; Refresh
+                           86400              ; Retry
+                         2419200              ; Expire
+                          604800  )           ; Negative Cache TTL
+```  
