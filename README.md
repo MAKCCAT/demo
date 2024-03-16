@@ -132,13 +132,15 @@ INTERFACESv6="ens224 ens256"
 Пример DHCP для ipv4 без Relay:  
 ```
 default-lease-time 600;  
-max-lease-time 7200;  
-ddns-updates on;  
-ddns-update-style interim;  
-authoritative;
+max-lease-time 7200;
   
+ddns-updates on;  
+ddns-update-style interim;
+  
+authoritative;
+    
 subnet 192.168. 1.0 netmask 255.255.255. 192 {
- range 192. 168.1.3 192.168.1.62;
+ range 192. 168.1.3 192.168.1.63;
  option routers 192.168.1.1;
  option domain-name "hq.work";
  option domain-name-servers 192.168.1.2;
@@ -150,6 +152,7 @@ subnet 192.168. 1.0 netmask 255.255.255. 192 {
 ```subnet``` — указание сети  
 ```range — пул адресов```  
 ```option routers — шлюз по умолчанию```  
+subnet нужно 3 шт  
 ```diff
 -Примечание: после каждого изменения конфигурации необходимо
 -перезагружать DHCP сервер для применения конфигурации
