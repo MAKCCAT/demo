@@ -76,7 +76,8 @@ network 192.168.2.0/28 area 2
 ```exit```  
 После завершения конфигурации в frr написать ```write```  
 ```nano /etc/sysctl.conf```  
-переменную ```net.ipv4.ip_forward=1``` и ```net.ipv6.conf.all.forwarding=1``` необходимо раскоментить и сохранинть измнения в файле, и применить изменения командой
+переменную ```net.ipv4.ip_forward=1``` и ```net.ipv6.conf.all.forwarding=1``` 
+необходимо раскоментить и сохранинть измнения в файле, и применить изменения командой  
 ```sysctl –p ```  
 ```diff
 -При каждой перезагрузки прописывать sysctl –p 
@@ -112,7 +113,7 @@ exit
 ``` 
 После завершения конфигурации в frr написать ```write```  
 L3 Пример  соединения: ipv4/mask and ipv6/mask  
-'''systemctl restart frr'''  
+```systemctl restart frr```  
 # 3 HQ-R (автоматическое распределение IP DHCP)  
 ```  
 apt install isc-dhcp-server  
@@ -123,7 +124,8 @@ nano /etc/default/isc-dhcp-server
 ```
 INTERFACESv4="ens224 ens256"   
 INTERFACESv6="ens224 ens256"
-```  
+```
+так же необходимо раскоментировать команды
 ---
 ### IPv4
 ``` nano /etc/dhcp/dhcpd.conf ```  
