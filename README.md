@@ -4,7 +4,7 @@
 ### Name   
 ```
 hostnamectl set-hostname Имя устройства  
-Newgrp
+newgrp
 ```
 ### IP
 |Name|Ipv4|mask|Def_get|Ipv6/mask|Def_getv6|
@@ -23,7 +23,7 @@ Newgrp
 |BRSRV-BRR|192.168.2.2|255.255.255.240|10.10.10.5|2001::2:2/124|2001::2:1/124|
 ---
 ![maskv4](https://myeditor.ru/wp-content/uploads/b/8/3/b83c1b85ee91682121df78aca1e4576f.png)  
-```Ip a```  
+```ip a```  
 ```  
 apt install network-manager
 NMTUI  
@@ -33,10 +33,6 @@ NMTUI
 После настройки необходимо зайти в  
 activate a connection и перезагрузить все интерфейсы  
 (нажать deactivate и activate на каждом интерфейсе)  
-Примечание: На интерфейсах находящихся между маршрутизаторами не нужно
-указывать dns, достаточно это сделать на внутренних локальных интерфейсах
-маршрутизаторов. Так же не нужно указывать dns на устройствах ISP и CLI
-(Если иного не указано в задании) так как они не принадлежат нашему домену
 ```diff  
 Примечание: На интерфейсах находящихся между маршрутизаторами не нужно  
 указывать dns, достаточно это сделать на внутренних локальных интерфейсах  
@@ -77,8 +73,8 @@ nano /etc/frr/daemons
 изменить параметры на YES для протокола ospfd и ospf6d  
 ### Настройка OSPF v4
 ```
-Vtysh 
-Conf t  
+vtysh 
+conf t  
 router ospf 
 ```
 |Name|id|network|area|
@@ -109,8 +105,8 @@ network 192.168.2.0/28 area 2
 ```  
 ### Настройка OSPF v6
 ```
-Vtysh
-Conf t  
+vtysh
+conf t  
 router ospf6  
 ```
 |Name|id|area|range/mask|
