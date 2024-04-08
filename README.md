@@ -7,7 +7,7 @@ hostnamectl set-hostname Имя устройства
 newgrp
 ```
 ### IP
-|Name|Ipv4|mask|Def_get|Ipv6/mask|Def_getv6||DNS|  
+|Name|Ipv4|mask|Def_get|Ipv6/mask|Def_getv6|DNS|  
 |---|---|---|---|---|---|---|  
 |CLI-ISP|192.168.0.2|255.255.255.0|192.168.0.1|2001::3:2/120|2001::3:1/120|-|  
 |CLI-HQR|-|-|-|-|-|-|  
