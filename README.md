@@ -27,7 +27,7 @@ newgrp
 ```ip a```  
 ```  
 apt install network-manager
-NMTUI  
+nmtui
 ```
 В nmtui пройдя по пути Edit a connection — имя интерфейса  
 Необходимо настройть ip адреса в соответствии с таблицей адресации  
