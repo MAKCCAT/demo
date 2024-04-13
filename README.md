@@ -155,7 +155,9 @@ INTERFACESv6="ens224 ens256"
 ---
 ### IPv4
 ``` nano /etc/dhcp/dhcpd.conf ```  
-Пример DHCP для ipv4 без Relay:  
+Пример DHCP для ipv4 без Relay: 
+https://shootnick.ru/ip6_calc/21--1-0/122
+https://shootnick.ru/ip_calc/
 ```
 default-lease-time 600;  
 max-lease-time 7200;
