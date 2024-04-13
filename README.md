@@ -71,6 +71,9 @@ gateway 2001::7:2
 apt install frr 
 nano /etc/frr/daemons
 ```
+не устанавливается 
+```dhcpclient -r```  
+```dhcpclient -v```  
 изменить параметры на YES для протокола ospfd и ospf6d  
 ### Настройка OSPF v4
 ```
