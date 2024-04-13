@@ -1,3 +1,4 @@
+Порт группы: HQ BRANCH INTERNET
 # *****************Module_1*****************
 навсякий https://disk.yandex.ru/d/L_zygCZ82cjYPw  
 # 1 ALL (Name/IPv4/IPv6)
