@@ -348,12 +348,13 @@ zone "hq.work" {
   file "/etc/bind/hq";  
   allow-update {any;};  
   allow-transfer {any;};  
-};  
+};
+
 zone "1.168.192.in-addr.arpa" {  
   type master;  
   file "/etc/bind/hq_arpa";  
   allow-update {any;};  
-};  
+};
 zone "0.0.0.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.2.ip6.arpa" {  
   type master;  
   file "/etc/bind/hq6_arpa";  
@@ -370,21 +371,22 @@ hq.work — зона прямого просмотра
 in-addr.arpa — зона обратного просмотра ipv4  
 ip6.arpa — зона обратного просмотра ipv6 (указывается полностью. В обратном порядке)  
 Зоны для hq.work
-```
-zone "hq.work" {
-  type master;
-  file "/etc/bind/hq";
-  allow-update {any;};
-  allow-transfer {any;};
-};
-zone "1.168.192.in-addr.arpa" {
-  type master;
-  file "/etc/bind/hq_arpa";
-  allow-update {any;};
-};
-zone "0.0.0.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.2.ip6.arpa" {
-  type master;
-  file "/etc/bind/hq6_arpa";
-  allow-update {any;};
-};
 ```  
+zone "branch.work" {  
+  type master;  
+  file "/etc/bind/branch";  
+  allow-update {any;};  
+  allow-transfer {any;};  
+};  
+  
+zone "2.168.192.in-addr.arpa" {  
+  type master;  
+  file "/etc/bind/branch_arpa";  
+  allow-update {any;};  
+};  
+zone "0.0.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.2.ip6.arpa" {  
+  type master;  
+  file "/etc/bind/branch6_arpa";  
+  allow-update {any;};  
+};  
+```    
