@@ -402,7 +402,19 @@ zone "0.0.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1.0.0.2.ip6.arpa" {
 ;
 $TTL     604800
 @        IN      SOA      hq.work.   root.hq.work. (
-
+                                2          ;Serial
+                            604800         ;Refresh
+                             86400          ;Retry
+                           2419200          ;Expire
+                            604800 )        ;Negative Cache TTL
+;
+@        IN      NS       hq.work.      
+@        IN      A        192.168.1.2
+HQ-SRV   IN      AAAA     2001::1:2
+HQ-SRV   IN      A        192.168.1.2
+HQ-R     IN      A        192.168.1.1
+HQ-R     IN      AAAA     2001::1:1
+SERVER   IN      CNAME    HQ-SRV
 ```  
 Где:  
 NS запись — обозначение сервера отвественного за разрешение запросов к dns  
