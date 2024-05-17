@@ -528,7 +528,7 @@ Environment="HTTPS_PROXY=http://10.0.70.52:3128"
 После чего необходимо перезагрузить машину  
 Следующим шагом уже переходим к запуску контейнера с хранящейся там FreeIPA, в качестве параметров ключей, указывает имя, указываем доменную сеть, а так открываем все необходимые для работы порты, указываем путь и образ, разрешаем конфликт с IPv6. Все параметры показаны на рисунке   
 ```  
-rootCHQ-SRV:~# docker run --name freeipa-server -ti -h hq-srv.hq.work -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp --read-only --sysctl net. ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:rw -v /var/lib/ipa-data:/data:Z freeipa/freeipa-server: centos-8-4.8.4  
+docker run --name freeipa-server -ti -h hq-srv.hq.work -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp --read-only --sysctl net. ipv6.conf.all.disable_ipv6=0 -v /sys/fs/cgroup:/sys/fs/cgroup:rw -v /var/lib/ipa-data:/data:Z freeipa/freeipa-server: centos-8-4.8.4  
 ```
 Важное Примечание:  
 В случае завершения выполняемых функций в контейнере в результате которых оболочка может перейти в состояние freezing, или при успешном завершении, для выхода из оболочки окружения необходимо последовательно нажать сочетание клавиш ```ctrl + p```, а затем ```ctrl + q```. В случае если вам необходимо остановить контейнер можно воспользоваться командой ```docker stop``` имя контейнера, для удаления контейнера ```docker rm имя контейнера```, для просмотра существующих образов ```docker images```  
@@ -574,3 +574,11 @@ rootCHQ-SRV:~# docker run --name freeipa-server -ti -h hq-srv.hq.work -p 80:80 -
 На вопрос о конфигурировании с текущими значение пишем yes  
 Для проверки входа в FreeIPA, на клиентской машине необходимо открыть браузер и в адресной строке написать IP адрес машины HQ-SRV (192.168.1.2) логин и пароль для входа в вебку FreeIPA: admin и P@ssw0rd  
 Важное Примечание: если вы перезагрузите машину, то контейнер выключится, для его запуска можно воспользоваться командой  ```docker start freeipa-server```  
+# 6 HQ-SRV Запустите сервис MediaWiki используя docker на сервере HQ-SRV  
+Первым шагом необходимо установить docker compose, так как сам докер устанавливался в задании №3 второго модуля.  
+Для этого посредством команды, показанной на рисунке ниже, скачаем необходимый пакет.  
+```curl -L "https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-$ (uname -s) -$(uname -m) -o /usr/local/bin/docker-compose```  
+Командой, указанной на рисунке ниже, выдаём необходимые права для скаченной службы  
+```chmod +x /usr/local/bin/docker-compose```  
+Далее для того, чтобы с нуля не писать yml файл, можно скачать похожий по смыслу файл, приведённый на рисунке ниже (если будет запрещено, будете писать сами)  
+```wget -L "https://raw.githubusercontent.com/pirate/wikipedia-mirror/master/docker-compose.mediawiki.yml" -0 /home/admin/wiki.yml```  
