@@ -555,5 +555,22 @@ rootCHQ-SRV:~# docker run --name freeipa-server -ti -h hq-srv.hq.work -p 80:80 -
 ```
 для BRSRV
 ```
+127.0.0.1      localhost
+127.0.1.1      br-srv.branch.work    br-srv
 
+192. 168.1.2   hq-srv.hq.work
 ```
+Следующим шагом посредством команды:  
+```apt install freeipa-client```  
+Производим установку клиентской части FreeIPA для ввода машины в домен.  
+На все всплывающие окна во время установки нажимаем Enter  
+После установки клиента, для ввода машины в домен необходимо прописать команды:   
+НА CLI  
+```ipa-client-install --mkhomedir --domain hq.work --server=hq-srv.hq.work -p admin -W```  
+НА BR-SRV  
+```ipa-client-install --mkhomedir --domain branch.work --server=hq-srv.hq.work -p admin -W```  
+На сообщение о продолжении с фиксированными значения пишем yes  
+На вопрос о конфигурирование CHRONY нажимаем ENTER  
+На вопрос о конфигурировании с текущими значение пишем yes  
+Для проверки входа в FreeIPA, на клиентской машине необходимо открыть браузер и в адресной строке написать IP адрес машины HQ-SRV (192.168.1.2) логин и пароль для входа в вебку FreeIPA: admin и P@ssw0rd  
+Важное Примечание: если вы перезагрузите машину, то контейнер выключится, для его запуска можно воспользоваться командой  ```docker start freeipa-server```  
