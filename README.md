@@ -271,28 +271,6 @@ echo "Backup finished"
 
 ls -lh $dest
 ```  
-2) Расширеный вариант:
-```
-#!/bin/bash
-backup_files="/home /etc /root /boot /opt"
-
-dest="/mnt/backup"
-
-day=$(date +%A)
-hostname=$(hostname -s)
-archive_file="$hostname-$day.tgz"
-echo "Backing up $backup_files to $dest/$archive_file"
-date
-echo
-
-tar czf $dest/sarchive_file $backup_files
-
-echo
-echo "Backup finished"
-date
-
-ls -lh $dest
-```  
 Где:  
 backup_files — копируемые директории  
 dest — место куда копируем директории  
@@ -314,13 +292,13 @@ echo — необязательные строки вывода
 ```scp /расположение/имя_файла имя@адрес :/расположение/имя_файла```  
 Пример:  
 ```scp /etc/backup.sh network_admin@192.168.2.1:/home/network_admin```  
-# 7 HQ-SRV (SSH по порту 2222, средства контролирования трафика)  
+# 7 HQ-SRV (SSH по порту 3035, средства контролирования трафика)  
 ```nano /etc/ssh/sshd_config```  
-Изменяем порт на 2222  
+Изменяем порт на 3035  
 ```systemctl restart ssh```  
 ```apt install iptables-persistent```  
 правило iptables для подмены порта ssh:  
-```iptables -t nat -A PREROUTING -d 192.168.1.2/26 -p tcp -m tcp --dport -destination 192.168.1.2:2222```  
+```iptables -t nat -A PREROUTING -d 192.168.1.2/28 -p tcp -m tcp --dport -destination 192.168.1.2:3035```  
 (это одна команда)  
 ```iptables-save > /etc/iptables/rules.v4 ```  
 # 8 ALL but dont CLI (контроль доступа до HQ-SRV по SSH со всех устройств)  
@@ -467,81 +445,3 @@ systemctl start bind9
 ---
 
 # 2  ALL (синхрон время NTP)  
-a. В качестве сервера должен выступать роутер HQ-R со стратумом 5  
-b. Используйте Loopback интерфейс на HQ-R, как источник сервера времени  
-c. Все остальные устройства и сервера должны синхронизировать свое время с  
-роутером HQ-R  
-d. Все устройства и сервера настроены на московский часовой пояс (UTC +3)  
-Настройка производится на всех машинах указанных в топологии , при этом  
-настройка на машине выступающей в роли NTP сервера уникальна , а на NTP  
-клиентах идентична  
-
----  
-
-ALL:  
-Время на МСК: ```timedatectl set-timezone Europe/Moscow```  
-Служба CHRONY: ```apt install chrony```  
-
----
-
-HQ-R:  
-```nano /etc/chrony/chrony.conf```  
-указание адреса NTP сервера с определённым стратумом  
-```  
-#pool 2.debian.pool.ntp.org lburst  
-server 127.0.0.1 iburst  
-#Use time sources from DHCP.  
-sourcedir /run/chrony-dhcp  
-local stratum 5  
-```  
-Разрешение передачи NTP рассылок в указанной сети  
-```
-allow 192.168.0.0/22  
-```
-```diff  
-Примечание: Нет необходимости указывать все сети которые присуствует в  
-нашей сети, достаточно указать только одну сеть каждой машины , а так как у  
-нас используется сети 192.168.0.0 , 192.168.1.0 и 192.168.2.0 , есть возможность  
-взять сеть 192.168.0.0 с 22 маской которая будет включать в себя сеть  
-начинаюущуюся с адреса 192.168.0.0 и заканчивающаяся адресом 192.168.3.255
-```
-Настройка NTP клиентов chrony  
-```nano /etc/chrony/chrony.conf```  
-```
-#Use Debian vendor zone.  
-pool 2.debian.pool.ntp.org iburst  
-server 192. 168.1.1  
-```
-
----  
-
-# 3  HQ-SRV (Домен через web интерфейс)  
-a. Введите машины BR-SRV и CLI в данный домен  
-b. Организуйте отслеживание подключения к домену  
-В качестве домена может быть выбраны один из двух вариантов,  
-или SAMBA DC , или FREEIPADOCKER  
-ДЛЯ настройки будет выбрана именно FreeIpa  
-  
-Первым делом необходимо установить докер , однако для этого нам необходимо  
-экспортировать переменные окружения относящиеся к Proxy  
-(Если Proxyотсуствует т. е. Пакеты с  
-не стандартных репозиториев устанавливаются сами,  
-то первый шаг можно пропустить)  
-
-Первым шагом необходимо посмотреть переменные которые необходимо  
-экспортировать перейдя по пути  
-```nano /etc/apt/apt.conf.d/01proxy```  
-и посмотреть находящиеся там значения, после чего посредством команд  
-```  
-export http_proxy=http(или https)://(адрес:порт)  
-export https_proxy=http(или https)://(адрес:порт)
-```  
-Экспортировать переменные прокси для доступа в интернет  
-ПРИМЕР:  
-```
-Acquire::http::Proxy "http://10.0.70.52:312B";  
-Acquire::https::Proxy "http://10.0.70.52:3128":  
-#END ANSIBLE MANAGED BLOCK  
-```
-установка самого DOCKER  
-```wget -qO- https://get.docker.com | bash```  
